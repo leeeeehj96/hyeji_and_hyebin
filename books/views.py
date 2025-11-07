@@ -10,3 +10,13 @@ def index(request):
         'books': books,
     }
     return render(request, 'books/index.html', context)
+
+
+def thread_create (request, book_pk):
+    book = Book.objects.get(pk=book_pk)
+    thread = ThreadForm()
+    context = {
+        'book' : book,
+        'thread' : thread,
+    }
+    return render(request, 'detail', context, book_pk)
