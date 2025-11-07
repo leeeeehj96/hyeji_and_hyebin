@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}도서 목록{% endblock %}
+{% block content %}
+<h1>도서 목록</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>제목</th>
+      <th>저자</th>
+      <th>평점</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for book in books %}
+    <tr>
+      <td><a href="{% url 'books:detail' book.pk %}">{{ book.title }}</a></td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.rating }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="3">등록된 도서가 없습니다.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
