@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}게시글 작성{% endblock %}
+{% block content %}
+<h1>게시글 작성 - {{ book.title }}</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary">등록</button>
+</form>
+
+<a href="{% url 'books:detail' book.pk %}" class="btn btn-link mt-3">도서 상세로 돌아가기</a>
+{% endblock %}

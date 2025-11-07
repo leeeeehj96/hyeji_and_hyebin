@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}도서 상세{% endblock %}
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p>저자: {{ book.author }}</p>
+<p>평점: {{ book.rating }}</p>
+<p>설명: {{ book.description }}</p>
+
+<a class="btn btn-secondary" href="{% url 'books:update' book.pk %}">수정</a>
+
+<form action="{% url 'books:delete' book.pk %}" method="POST" style="display:inline;">
+  {% csrf_token %}
+  <button class="btn btn-danger">삭제</button>
+</form>
+
+<a class="btn btn-link" href="{% url 'books:index' %}">목록으로</a>
+
+<hr>
+<h2>독서 쓰레드</h2>
+<a class="btn btn-primary" href="{% url 'books:thread_create' book.pk %}">게시글 작성</a>
+
+<ul class="mt-3">
+  {% for thread in threads %}
+    <li>
+      <a href="{% url 'books:thread_detail' thread.pk %}">{{ thread.title }}</a>
+      ({{ thread.reading_date }})
+    </li>
+  {% empty %}
+    <li>아직 게시글이 없습니다.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

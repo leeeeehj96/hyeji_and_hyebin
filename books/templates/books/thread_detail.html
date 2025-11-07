@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}게시글 상세{% endblock %}
+{% block content %}
+<h1>{{ thread.title }}</h1>
+<p>도서: <a href="{% url 'books:detail' thread.book.pk %}">{{ thread.book.title }}</a></p>
+<p>독서일: {{ thread.reading_date }}</p>
+<p>작성일: {{ thread.created_at }}</p>
+<p>수정일: {{ thread.updated_at }}</p>
+
+<hr>
+<p>{{ thread.content|linebreaks }}</p>
+
+<a class="btn btn-secondary" href="{% url 'books:thread_update' thread.pk %}">수정</a>
+
+<form action="{% url 'books:thread_delete' thread.pk %}" method="POST" style="display:inline;">
+  {% csrf_token %}
+  <button class="btn btn-danger">삭제</button>
+</form>
+
+<a class="btn btn-link" href="{% url 'books:detail' thread.book.pk %}">도서 상세로 돌아가기</a>
+{% endblock %}

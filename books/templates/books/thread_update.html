@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}게시글 수정{% endblock %}
+{% block content %}
+<h1>게시글 수정 - {{ thread.title }}</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary">수정 완료</button>
+</form>
+
+<a href="{% url 'books:thread_detail' thread.pk %}" class="btn btn-link mt-3">게시글로 돌아가기</a>
+{% endblock %}
